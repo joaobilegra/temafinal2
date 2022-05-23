@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    stages {
+        stage ('Build image docker') {
+            steps {
+                sh 'docker build -t app-java .'
+
+             }
+         }
+      }
+  }

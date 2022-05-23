@@ -1,0 +1,30 @@
+trigger:
+- master
+
+pool:
+  name: 'DevOps'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: Bash@3
+  displayName: tf-lint
+  inputs:
+    # ...
+    failOnStandardError: true
+
+- task: Bash@3
+  displayName: shellcheck
+  inputs:
+    # ...
+    failOnStandardError: true
+
+- task: AWSShellScript@1
+  displayName: AWS Sync
+  inputs:
+    awsCredentials: 'AWS Creds'
+    regionName: 'us-east-1'
+    scriptType: 'inline'
+    # ...
+    failOnStandardError: true

@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    options {
+        buildDiscarder(logRotator(numToKeepStr: "10"))
+    }
+
+    parameters {
+        choice(name: 'BRANCH', choices: ['master', 'develop'], description: 'Branch source')
+        choice(name: 'ENVIRONMENT', choices: ['shared','dev','prod'], description: 'Environment')
+        choice(name: 'REGION', choices: ['us-east-1','sa-east-1'], description: 'AWS Region')
+    }
+    environment {
+        VERSION_PIPELINE = '0.1a'
+        PATH = "${WORKSPACE}/bin:${PATH}"
+        TF_BUCKET =  "iac-tf-remotestate-poc-${ENVIRONMENT}-${JOBNAME}"
+        DECRYPT_PASSWORD = credentials('jenkins-decrypt-password')
+    }
+
+    stages {
+        stage('Install dependencies') {
+            steps {
+                // ...
+            }
+        }
+        stage('Decrypt Secrets') {
+            steps {
+                // ...
+            }
+        }
+        stage('Tests - Iac') {
+            steps {
+                // ...
+            }
+        }
+        stage('Deploy Infra') {
+            steps {
+                // ...
+            }
+        }
+    }
+    post {
+        success {
+                // ...
+        }
+        always {
+            cleanWs()
+        }
+    }
+}

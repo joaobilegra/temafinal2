@@ -1,0 +1,21 @@
+pipeline{
+    agent any
+    stages{
+        stage('Remove container'){
+         steps{
+            
+             sh 'docker rm app-java --force'
+         }
+    }
+    stage('Remove image'){
+       steps{
+            sh  'docker rmi app-java --force'
+                       
+            }
+
+        }    
+     
+    }
+    
+}
+

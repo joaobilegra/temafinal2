@@ -1,0 +1,18 @@
+pipeline {
+    agent any
+    stages {
+        stage ('Run container') {
+            steps {
+                sh 'docker run --restart unless-stopped -dti -p 8080:8080 --name app-java app-java'
+
+             }
+         }
+        stage ('test') {
+            steps {
+                sh 'docker port app-java'
+
+             }
+         }
+ 
+   }
+}
