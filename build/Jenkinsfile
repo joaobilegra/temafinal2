@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'teste'}
+    agent {label 'model'}
     stages {
         stage ('Build image docker') {
             steps {
