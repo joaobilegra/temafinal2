@@ -1,5 +1,5 @@
 pipeline{
-    agent any
+    agent {label 'model'}
     stages{
         stage('run job1'){
          steps{
